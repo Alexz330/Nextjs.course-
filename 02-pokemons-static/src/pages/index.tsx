@@ -4,24 +4,22 @@ import Image from "next/image";
 import { Layout } from "../components/layouts";
 import pokeApi from "../../api/pokeApi";
 import { PokemonListResponse, SmallPokemon } from "../../interfaces";
+import { Grid} from "@nextui-org/react";
+import { PokemonCard } from "../components/pokemon/PokemonCard";
 
 interface Props {
   pokemons: SmallPokemon[];
 }
 
 const HomePage: NextPage<Props> = ({ pokemons }) => {
-  console.log(pokemons[0].img, "img");
 
   return (
     <Layout title="List Pokemons">
-      <ul>
-        {pokemons.map((pokemon, i) => (
-          <li key={i}>
-            <p>#{pokemon.id}-{pokemon.name}</p>
-            <Image src={pokemon.img} width={70} height={70} alt={""} />
-          </li>
+      <Grid.Container gap={10} justify="flex-start">
+        {pokemons.map((pokemons,i) => (
+          <PokemonCard pokemons={pokemons} key={i}/>
         ))}
-      </ul>
+      </Grid.Container>
     </Layout>
   );
 };
